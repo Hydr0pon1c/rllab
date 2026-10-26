@@ -1,0 +1,41 @@
+dataset:
+  name: smoke
+  seed: 20260824
+  num_instances: 1
+
+generator:
+  horizon: 3
+  width: 4
+  terminal_width: 4
+  num_actions: 4
+  min_cost: 1
+  max_cost: 9
+  terminal_cost_min: 0
+  terminal_cost_max: 20
+  min_optimality_gap: 1
+
+difficulty:
+  min_delayed_choice_rate: null
+  max_delayed_choice_rate: null
+  min_uniform_regret_per_step: null
+  max_uniform_regret_per_step: null
+  min_mean_q_gap: 1.0
+  max_mean_q_gap: null
+  min_mean_depth_entropy: null
+  max_generation_attempts: 64
+
+splits:
+  train: 1.0
+  validation: 0.0
+  test: 0.0
+
+tokenizer:
+  path: models/Qwen3-8B
+  source: Qwen/Qwen3-8B
+  revision: b968826d9c46dd6066d109eabc6255188de91218
+  action_labels: [A, B, C, D]
+  state_pool_size: 64
+  enable_thinking: false
+
+labelings: [random]
+

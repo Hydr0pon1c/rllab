@@ -1,0 +1,27 @@
+# Engine settings only; native_config supplies scientific controls from the plan.
+data:
+  train_files: []
+  val_files: []
+  max_prompt_length: 1024
+  max_response_length: 3072
+actor_rollout_ref:
+  actor:
+    calculate_entropy: false
+    fsdp_config:
+      param_offload: true
+  rollout:
+    n: 1
+    enforce_eager: true
+    max_model_len: 4096
+    max_num_seqs: 64
+    max_num_batched_tokens: 4096
+    gpu_memory_utilization: 0.4
+    engine_kwargs:
+      vllm:
+        generation_config: vllm
+algorithm:
+  adv_estimator: rllab_supplied_credit
+reward:
+  reward_model:
+    rollout:
+      name: vllm

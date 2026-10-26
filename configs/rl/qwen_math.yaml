@@ -1,0 +1,21 @@
+# Scientific controls are shared by ORM and PRM; devices are execution overrides.
+study:
+  name: qwen-math5-fixed-step-v3
+  model: models/Qwen2.5-7B-Instruct
+  dataset: data/math/questions.jsonl
+  seed: 20260914
+  level: 5
+  questions_per_update: 16
+  roots_per_question: 8
+  updates: 64
+  mc_samples: 32
+  learning_rate: 0.0001
+  scale_rule: fixed_parameter_step
+  target_parameter_step_l2: 0.01
+  train_questions: 1024
+  test_questions: 512
+  eval_samples: 4
+  eval_every: 16
+  checkpoint_every: 8
+  max_wall_seconds: 86400
+  acceptance: false

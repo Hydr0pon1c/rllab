@@ -1,0 +1,25 @@
+__pycache__/
+*.py[cod]
+*.egg-info/
+.pytest_cache/
+.ruff_cache/
+.coverage
+htmlcov/
+.venv/
+dist/
+build/
+
+# Local links into persistent storage. Recreate with `rllab-data storage init`.
+/data
+/models
+.rllab.local.toml
+
+# Private research and manuscripts are excluded from the code release.
+/.research/
+/paper/
+/idea.md
+/experiment_results.md
+/PPU_RUNBOOK.md
+/outputs/
+*.pt
+*.safetensors

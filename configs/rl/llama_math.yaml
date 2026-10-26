@@ -1,0 +1,6 @@
+# Overrides to qwen_math.yaml; paired IDs are frozen with --reference-plan.
+study:
+  name: llama-math5-fixed-step-v1
+  actor: llama
+  model: models/Llama-3.1-8B-Instruct
+  temperature: 0.6

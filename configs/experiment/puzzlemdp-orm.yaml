@@ -1,0 +1,46 @@
+schema_version: rllab-experiment-config/v1
+
+model:
+  path: models/Qwen3-8B
+  revision: b968826d9c46dd6066d109eabc6255188de91218
+  attention_implementation: sdpa
+  master_dtype: float32
+  compute_dtype: float32
+  gradient_checkpointing: false
+
+data:
+  path: data/study-v2-h32-w16-a4/latest
+  geometry_path: null
+  split: train
+  labeling_mode: random
+  max_instances: 8
+
+training:
+  credit_mode: orm
+  steps: 128
+  trajectories_global: 16
+  train_microbatch_states: 16
+  forward_batch_states: 32
+  learning_rate: 1.25e-10
+  scale_rule: fixed_parameter_step
+  target_parameter_step_l2: 4.346703360702091e-6
+  evaluation_interval: 128
+  evaluation_steps: [8, 16, 32, 64, 128]
+  checkpoint_interval: 32
+  keep_checkpoints: 1
+  save_final_checkpoint: false
+  kernel_probe_steps: []
+  kernel_probe_fraction: 0.1
+
+runtime:
+  seed: 20260825
+  deterministic_algorithms: false
+  allow_tf32: false
+  log_every: 1
+  min_free_device_gib: 80.0
+
+output:
+  root: outputs/puzzlemdp
+  run_name: puzzlemdp-random
+  run_id: null
+  resume: false

@@ -1,0 +1,18 @@
+{
+  "verl_release": "v0.9.0",
+  "verl_revision": "483b8a009ba3a97563edee3a19887e4862b8094a",
+  "archive_sha256": "e30f6cc0c09a3e919415a569a529e04f6522b9259c03c95d65ad6d70c380fba8",
+  "vendor_packages": {
+    "torch": "2.10.0+v0.1.0.ppu2.1.0.oe",
+    "vllm": "0.19.0+v0.1.0.ppu2.1.0.oe",
+    "flash-attn": "2.8.2+v0.1.0.ppu2.1.0.oe",
+    "triton": "3.5.0+gitcc5446cf",
+    "transformers": "5.6.2"
+  },
+  "private_packages": [
+    "numpy==2.2.6",
+    "scipy==1.15.3",
+    "scikit-learn==1.6.1",
+    "joblib==1.4.2"
+  ]
+}

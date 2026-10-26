@@ -1,0 +1,40 @@
+dataset:
+  name: study-v2-h32-w16-a4
+  seed: 20260825
+  num_instances: 10
+
+generator:
+  horizon: 32
+  width: 16
+  terminal_width: 16
+  num_actions: 4
+  min_cost: 1
+  max_cost: 9
+  terminal_cost_min: 0
+  terminal_cost_max: 20
+  min_optimality_gap: 1
+
+difficulty:
+  min_delayed_choice_rate: 0.33
+  max_delayed_choice_rate: 0.36
+  min_uniform_regret_per_step: 3.78
+  max_uniform_regret_per_step: 3.90
+  min_mean_q_gap: 2.82
+  max_mean_q_gap: 2.92
+  min_mean_depth_entropy: 0.99
+  max_generation_attempts: 4096
+
+splits:
+  train: 0.8
+  validation: 0.1
+  test: 0.1
+
+tokenizer:
+  path: models/Qwen3-8B
+  source: Qwen/Qwen3-8B
+  revision: b968826d9c46dd6066d109eabc6255188de91218
+  action_labels: [A, B, C, D]
+  state_pool_size: 512
+  enable_thinking: false
+
+labelings: [random]

@@ -1,0 +1,94 @@
+# Infrastructure profile, not a runnable scientific experiment.
+# The next contract supplies the missing model/data/credit/budget fields.
+defaults:
+  - ppo_trainer
+  - _self_
+
+hydra:
+  searchpath:
+    - pkg://verl.trainer.config
+
+data:
+  train_files: ???
+  val_files: ???
+  train_batch_size: ???
+  max_prompt_length: ???
+  max_response_length: ???
+
+actor_rollout_ref:
+  model:
+    path: ???
+    lora_rank: 0
+    enable_gradient_checkpointing: true
+  actor:
+    strategy: fsdp2
+    ppo_mini_batch_size: ???
+    ppo_micro_batch_size_per_gpu: 1
+    ppo_epochs: 1
+    shuffle: false
+    loss_agg_mode: seq-mean-token-sum
+    entropy_coeff: 0.0
+    use_kl_loss: false
+    grad_clip: .inf
+    policy_loss:
+      loss_mode: bypass_mode
+    fsdp_config:
+      strategy: fsdp2
+      # Conventional FP32 master weights, BF16 actor computation.
+      model_dtype: fp32
+      dtype: bfloat16
+      full_determinism: false
+    optim:
+      optimizer: SGD
+      optimizer_impl: torch.optim
+      lr: ???
+      weight_decay: 0.0
+      lr_warmup_steps: 0
+      lr_warmup_steps_ratio: 0.0
+      lr_scheduler_type: constant
+      clip_grad: .inf
+      override_optimizer_config:
+        momentum: 0.0
+        dampening: 0.0
+        nesterov: false
+  rollout:
+    name: vllm
+    mode: async
+    dtype: bfloat16
+    temperature: 1.0
+    top_p: 1.0
+    top_k: -1
+    tensor_model_parallel_size: 1
+    n: ???
+    log_prob_micro_batch_size_per_gpu: 1
+    full_determinism: false
+
+algorithm:
+  # Must supply an explicit ORM/MC-PRM adapter; REINFORCE++ whitens by default.
+  adv_estimator: ???
+  gamma: 1.0
+  use_kl_in_reward: false
+  norm_adv_by_std_in_grpo: false
+  rollout_correction:
+    bypass_mode: true
+    loss_type: reinforce
+    rollout_is: null
+    rollout_rs: null
+    rollout_is_batch_normalize: false
+
+critic:
+  enable: false
+
+reward:
+  reward_model:
+    enable: false
+
+trainer:
+  project_name: rllab-real-rl
+  experiment_name: ???
+  logger: [console]
+  total_training_steps: ???
+  n_gpus_per_node: ???
+  nnodes: 1
+  default_local_dir: ???
+  resume_mode: disable
